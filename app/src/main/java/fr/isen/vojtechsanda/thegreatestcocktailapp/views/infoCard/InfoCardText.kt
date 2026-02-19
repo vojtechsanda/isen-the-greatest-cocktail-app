@@ -1,3 +1,5 @@
+package fr.isen.vojtechsanda.thegreatestcocktailapp.views.infoCard
+
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.colorResource

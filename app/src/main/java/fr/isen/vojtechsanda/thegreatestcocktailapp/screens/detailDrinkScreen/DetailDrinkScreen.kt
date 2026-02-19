@@ -1,9 +1,5 @@
-package fr.isen.vojtechsanda.thegreatestcocktailapp.screens.detailcocktailscreen
+package fr.isen.vojtechsanda.thegreatestcocktailapp.screens.detailDrinkScreen
 
-import CocktailScaffold
-import DetailCocktailCategoryView
-import InfoCardText
-import InfoCardView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -31,13 +27,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fr.isen.vojtechsanda.thegreatestcocktailapp.R
 import fr.isen.vojtechsanda.thegreatestcocktailapp.models.CategoryData
-import fr.isen.vojtechsanda.thegreatestcocktailapp.models.CocktailData
+import fr.isen.vojtechsanda.thegreatestcocktailapp.models.DrinkData
 import fr.isen.vojtechsanda.thegreatestcocktailapp.models.IngredientData
 import fr.isen.vojtechsanda.thegreatestcocktailapp.models.IngredientUnitEnum
+import fr.isen.vojtechsanda.thegreatestcocktailapp.screens.detailDrinkScreen.views.DetailDrinkCategoryView
+import fr.isen.vojtechsanda.thegreatestcocktailapp.screens.detailDrinkScreen.views.DetailDrinkTopAppBar
+import fr.isen.vojtechsanda.thegreatestcocktailapp.views.infoCard.InfoCardText
+import fr.isen.vojtechsanda.thegreatestcocktailapp.views.infoCard.InfoCardView
+import fr.isen.vojtechsanda.thegreatestcocktailapp.views.layout.appScaffold.AppScaffold
 
 @Composable
 fun DetailCocktailScreen() {
-    val cocktail = CocktailData(
+    val cocktail = DrinkData(
         image = painterResource(R.drawable.test_cocktail_detail),
         name = "Super cocktail",
         categories = listOf(
@@ -82,41 +83,43 @@ fun DetailCocktailScreen() {
         isFavorite = true
     )
 
-    CocktailScaffold(cocktail, content = { childModifier ->
-        Column(
-            modifier = childModifier
-                .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(24.dp)
-        ) {
-            ImageView(cocktail.image)
-
-            Text(cocktail.name, fontSize = 40.sp, fontWeight = FontWeight.Bold)
-
-            FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(
-                    20.dp,
-                    Alignment.CenterHorizontally
-                ),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.fillMaxWidth()
+    AppScaffold(
+        verticalScrolling = true,
+        topBar = { DetailDrinkTopAppBar(cocktail) },
+        content = { childModifier ->
+            Column(
+                modifier = childModifier,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(24.dp)
             ) {
-                cocktail.categories.map { DetailCocktailCategoryView(category = it) }
+                ImageView(cocktail.image)
+
+                Text(cocktail.name, fontSize = 40.sp, fontWeight = FontWeight.Bold)
+
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(
+                        20.dp,
+                        Alignment.CenterHorizontally
+                    ),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    cocktail.categories.map { DetailDrinkCategoryView(category = it) }
+                }
+
+                InfoCardView(
+                    title = stringResource(R.string.ingredients),
+                    titleIconVector = Icons.AutoMirrored.Filled.List,
+                    content = { cocktail.ingredients.map { IngredientView(it) } }
+                )
+
+                InfoCardView(
+                    title = stringResource(R.string.recipe),
+                    titleIconVector = Icons.Default.Info,
+                    content = { InfoCardText(cocktail.recipe) },
+                )
             }
-
-            InfoCardView(
-                title = stringResource(R.string.ingredients),
-                titleIconVector = Icons.AutoMirrored.Filled.List,
-                content = { cocktail.ingredients.map { IngredientView(it) } }
-            )
-
-            InfoCardView(
-                title = stringResource(R.string.recipe),
-                titleIconVector = Icons.Default.Info,
-                content = { InfoCardText(cocktail.recipe) },
-            )
-        }
-    })
+        })
 }
 
 @Composable

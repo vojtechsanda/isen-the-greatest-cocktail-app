@@ -2,7 +2,7 @@ package fr.isen.vojtechsanda.thegreatestcocktailapp.models
 
 import androidx.compose.ui.graphics.painter.Painter
 
-data class CocktailData(
+data class DrinkData(
     val image: Painter,
     val name: String,
     val categories: List<CategoryData>,

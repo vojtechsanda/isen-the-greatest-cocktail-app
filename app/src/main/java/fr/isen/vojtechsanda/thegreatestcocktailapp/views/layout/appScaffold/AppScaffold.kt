@@ -1,7 +1,10 @@
+package fr.isen.vojtechsanda.thegreatestcocktailapp.views.layout.appScaffold
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -12,16 +15,22 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import fr.isen.vojtechsanda.thegreatestcocktailapp.R
-import fr.isen.vojtechsanda.thegreatestcocktailapp.models.CocktailData
 
 @Composable
-fun CocktailScaffold(cocktail: CocktailData, content: @Composable (modifier: Modifier) -> Unit) {
+fun AppScaffold(
+    topBar: @Composable (() -> Unit) = {},
+    content: @Composable (modifier: Modifier) -> Unit,
+    verticalScrolling: Boolean = false,
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { DetailCocktailTopAppBar(cocktail) }
+        topBar = topBar
     ) { scaffoldInnerPadding ->
+        val scrollingModifier =
+            if (verticalScrolling) Modifier.verticalScroll(rememberScrollState()) else Modifier;
+
         Box(
-            modifier = Modifier
+            modifier = scrollingModifier
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
@@ -32,9 +41,12 @@ fun CocktailScaffold(cocktail: CocktailData, content: @Composable (modifier: Mod
                 )
                 .padding(scaffoldInnerPadding)
                 .fillMaxHeight()
-                .verticalScroll(rememberScrollState())
         ) {
-            content(Modifier.padding(all = 20.dp))
+            content(
+                Modifier
+                    .padding(all = 20.dp)
+                    .fillMaxWidth()
+            )
         }
     }
 }

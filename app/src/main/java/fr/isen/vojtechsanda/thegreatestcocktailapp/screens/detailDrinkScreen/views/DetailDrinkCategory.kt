@@ -1,3 +1,5 @@
+package fr.isen.vojtechsanda.thegreatestcocktailapp.screens.detailDrinkScreen.views
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -14,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import fr.isen.vojtechsanda.thegreatestcocktailapp.models.CategoryData
 
 @Composable
-fun DetailCocktailCategoryView(category: CategoryData) {
+fun DetailDrinkCategoryView(category: CategoryData) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(6.dp),
         modifier = Modifier
