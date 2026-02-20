@@ -1,6 +1,7 @@
 package fr.isen.vojtechsanda.thegreatestcocktailapp.models
 
-data class IngredientData(
+data class DrinkPreviewData(
+    val id: String,
     val name: String,
-    val amount: String?,
+    val imageUrl: String?,
 )

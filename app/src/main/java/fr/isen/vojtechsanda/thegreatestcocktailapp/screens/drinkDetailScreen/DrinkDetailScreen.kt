@@ -1,13 +1,10 @@
 package fr.isen.vojtechsanda.thegreatestcocktailapp.screens.drinkDetailScreen
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Info
@@ -17,10 +14,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -29,7 +22,6 @@ import fr.isen.vojtechsanda.thegreatestcocktailapp.R
 import fr.isen.vojtechsanda.thegreatestcocktailapp.models.CategoryData
 import fr.isen.vojtechsanda.thegreatestcocktailapp.models.DrinkData
 import fr.isen.vojtechsanda.thegreatestcocktailapp.models.IngredientData
-import fr.isen.vojtechsanda.thegreatestcocktailapp.models.IngredientUnitEnum
 import fr.isen.vojtechsanda.thegreatestcocktailapp.screens.drinkDetailScreen.views.DrinkDetailCategoryView
 import fr.isen.vojtechsanda.thegreatestcocktailapp.screens.drinkDetailScreen.views.DrinkDetailTopAppBar
 import fr.isen.vojtechsanda.thegreatestcocktailapp.views.infoCard.InfoCardText
@@ -37,48 +29,46 @@ import fr.isen.vojtechsanda.thegreatestcocktailapp.views.infoCard.InfoCardView
 import fr.isen.vojtechsanda.thegreatestcocktailapp.views.layout.appScaffold.AppScaffold
 
 @Composable
-fun DrinkDetailScreen(drinkId: String? = null) {
+fun DrinkDetailScreen(drinkId: String? = null, modifier: Modifier = Modifier) {
     val cocktail = DrinkData(
         id = "super-cocktail",
-        image = painterResource(R.drawable.test_cocktail_detail),
+        imageUrl = "https://example.com/example.png",
         name = "Super cocktail",
         categories = listOf(
             CategoryData(
                 id = "other-unknown",
-                text = "Other / Unknown",
+                name = "Other / Unknown",
                 iconVector = Icons.Default.Info,
-                backgroundFrom = colorResource(R.color.light_blue),
-                backgroundTo = colorResource(R.color.dark_blue)
+                backgroundFromRes = R.color.light_blue,
+                backgroundToRes = R.color.dark_blue
             ),
 
             CategoryData(
                 id = "non-alcoholic",
-                text = "Non alcoholic",
+                name = "Non alcoholic",
                 iconVector = Icons.Default.Warning,
-                backgroundFrom = colorResource(R.color.muted_sage),
-                backgroundTo = colorResource(R.color.dark_forest_green)
+                backgroundFromRes = R.color.muted_sage,
+                backgroundToRes = R.color.dark_forest_green
             ),
 
             CategoryData(
                 id = "highball-glass",
-                text = "Highball glass",
+                name = "Highball glass",
                 iconVector = Icons.Default.Star,
-                backgroundFrom = colorResource(R.color.transparent),
-                backgroundTo = colorResource(R.color.transparent),
-                textColor = colorResource(R.color.teal_200)
+                backgroundFromRes = R.color.transparent,
+                backgroundToRes = R.color.transparent,
+                textColorRes = R.color.teal_200,
             )
         ),
 
         ingredients = listOf(
             IngredientData(
                 name = "Yoghurt",
-                amount = 2.0,
-                unit = IngredientUnitEnum.CUP
+                amount = "2 cups",
             ),
             IngredientData(
                 name = "Fruit",
-                amount = 1.0,
-                unit = IngredientUnitEnum.PIECE
+                amount = "1 piece",
             )
         ),
 
@@ -92,11 +82,11 @@ fun DrinkDetailScreen(drinkId: String? = null) {
         topBar = { DrinkDetailTopAppBar(cocktail) },
         content = { childModifier ->
             Column(
-                modifier = childModifier,
+                modifier = childModifier.then(modifier),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(24.dp)
             ) {
-                ImageView(cocktail.image)
+                ImageView(cocktail.imageUrl)
 
                 Text(cocktail.name, fontSize = 40.sp, fontWeight = FontWeight.Bold)
 
@@ -120,16 +110,25 @@ fun DrinkDetailScreen(drinkId: String? = null) {
                 InfoCardView(
                     title = stringResource(R.string.recipe),
                     titleIconVector = Icons.Default.Info,
-                    content = { InfoCardText(cocktail.recipe) },
+                    content = {
+                        InfoCardText(
+                            text = cocktail.recipe ?: stringResource(R.string.no_recipe_found)
+                        )
+                    },
                 )
             }
         })
 }
 
 @Composable
-fun ImageView(image: Painter) {
+fun ImageView(imageUrl: String?) {
+    // TODO: Connect the URL
+
+    if (imageUrl != null) Text(imageUrl) else null
+
+    /*
     Image(
-        painter = image,
+        painter = painterResource(R.drawable.cocktail),
         "Test Cocktail",
         modifier = Modifier
             .clip(CircleShape)
@@ -140,6 +139,7 @@ fun ImageView(image: Painter) {
                 shape = CircleShape
             )
     )
+    */
 }
 
 @Composable
@@ -151,7 +151,7 @@ fun IngredientView(ingredient: IngredientData) {
         InfoCardText(ingredient.name)
 
         Row {
-            InfoCardText("${ingredient.amount} ${ingredient.unit}")
+            InfoCardText(ingredient.amount ?: "")
         }
     }
 }

@@ -13,7 +13,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import fr.isen.vojtechsanda.thegreatestcocktailapp.DrinksActivity
 import fr.isen.vojtechsanda.thegreatestcocktailapp.R
@@ -23,31 +22,31 @@ import fr.isen.vojtechsanda.thegreatestcocktailapp.views.columnItemCard.ColumnIt
 import fr.isen.vojtechsanda.thegreatestcocktailapp.views.layout.appScaffold.AppScaffold
 
 @Composable
-fun CategoriesScreen() {
+fun CategoriesScreen(modifier: Modifier = Modifier) {
     val categories = listOf(
         CategoryData(
             id = "other-unknown",
-            text = "Other / Unknown",
+            name = "Other / Unknown",
             iconVector = Icons.Default.Info,
-            backgroundFrom = colorResource(R.color.light_blue),
-            backgroundTo = colorResource(R.color.dark_blue)
+            backgroundFromRes = R.color.light_blue,
+            backgroundToRes = R.color.dark_blue
         ),
 
         CategoryData(
             id = "non-alcoholic",
-            text = "Non alcoholic",
+            name = "Non alcoholic",
             iconVector = Icons.Default.Warning,
-            backgroundFrom = colorResource(R.color.muted_sage),
-            backgroundTo = colorResource(R.color.dark_forest_green)
+            backgroundFromRes = R.color.muted_sage,
+            backgroundToRes = R.color.dark_forest_green
         ),
 
         CategoryData(
             id = "highball-glass",
-            text = "Highball glass",
+            name = "Highball glass",
             iconVector = Icons.Default.Star,
-            backgroundFrom = colorResource(R.color.transparent),
-            backgroundTo = colorResource(R.color.transparent),
-            textColor = colorResource(R.color.teal_200)
+            backgroundFromRes = R.color.transparent,
+            backgroundToRes = R.color.transparent,
+            textColorRes = R.color.teal_200,
         )
     );
 
@@ -58,7 +57,7 @@ fun CategoriesScreen() {
         topBar = { CategoriesTopAppBar() },
         content = { childModifier ->
             LazyColumn(
-                modifier = childModifier,
+                modifier = childModifier.then(modifier),
                 verticalArrangement = Arrangement.spacedBy(24.dp)
             ) {
 
@@ -68,7 +67,7 @@ fun CategoriesScreen() {
                             drinksIntent.putExtra("CATEGORY_ID", category.id)
                             context.startActivity(drinksIntent)
                         },
-                        title = category.text,
+                        title = category.name,
                         leading = {
                             Icon(
                                 imageVector = category.iconVector,

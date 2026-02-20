@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import fr.isen.vojtechsanda.thegreatestcocktailapp.models.CategoryData
 
@@ -23,14 +24,14 @@ fun DrinkDetailCategoryView(category: CategoryData) {
             .clip(RoundedCornerShape(40.dp))
             .border(
                 width = 2.dp,
-                color = category.backgroundFrom,
+                color = colorResource(category.backgroundFromRes),
                 shape = RoundedCornerShape(40.dp)
             )
             .background(
                 Brush.horizontalGradient(
                     colors = listOf(
-                        category.backgroundFrom,
-                        category.backgroundTo
+                        colorResource(category.backgroundFromRes),
+                        colorResource(category.backgroundToRes)
                     )
                 )
             )
@@ -39,9 +40,9 @@ fun DrinkDetailCategoryView(category: CategoryData) {
         Icon(
             imageVector = category.iconVector,
             contentDescription = "",
-            tint = category.textColor
+            tint = colorResource(category.textColorRes)
         )
 
-        Text(category.text, color = category.textColor)
+        Text(category.name, color = colorResource(category.textColorRes))
     }
 }

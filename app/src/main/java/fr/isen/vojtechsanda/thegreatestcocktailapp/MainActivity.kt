@@ -1,15 +1,16 @@
 package fr.isen.vojtechsanda.thegreatestcocktailapp
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -32,7 +33,6 @@ enum class AppBottomNavigation(val description: String) {
 }
 
 class MainActivity : ComponentActivity() {
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -60,19 +60,22 @@ class MainActivity : ComponentActivity() {
             TheGreatestCocktailAppTheme {
                 Scaffold(
                     bottomBar = { BottomNavigationBar(navController, items) }
-                ) {
+                ) { scaffoldPadding ->
+                    val scaffoldModifier =
+                        Modifier.padding(bottom = scaffoldPadding.calculateBottomPadding())
+
                     NavHost(
                         navController = navController,
                         startDestination = AppBottomNavigation.LIST.name
                     ) {
                         composable(AppBottomNavigation.RANDOM.name) {
-                            DrinkDetailScreen()
+                            DrinkDetailScreen(modifier = scaffoldModifier)
                         }
                         composable(AppBottomNavigation.LIST.name) {
-                            CategoriesScreen()
+                            CategoriesScreen(modifier = scaffoldModifier)
                         }
                         composable(AppBottomNavigation.FAVORITES.name) {
-                            FavoritesScreen()
+                            FavoritesScreen(modifier = scaffoldModifier)
                         }
                     }
                 }

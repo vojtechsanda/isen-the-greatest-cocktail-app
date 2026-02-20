@@ -6,9 +6,7 @@ plugins {
 
 android {
     namespace = "fr.isen.vojtechsanda.thegreatestcocktailapp"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "fr.isen.vojtechsanda.thegreatestcocktailapp"
@@ -33,16 +31,21 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
     buildFeatures {
         compose = true
     }
 }
 
-val navVersion = "2.9.7"
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+    }
+}
 
+val navVersion = "2.9.7"
+val gsonVersion = "2.13.2"
+val coilVersion = "3.3.0"
+val retrofitVersion = "3.0.0"
 
 dependencies {
     implementation(libs.androidx.core.ktx)
@@ -62,4 +65,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     implementation("androidx.navigation:navigation-compose:${navVersion}")
+    implementation("com.google.code.gson:gson:${gsonVersion}")
+    implementation("io.coil-kt.coil3:coil-compose:${coilVersion}")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:${coilVersion}")
+    implementation("com.squareup.retrofit2:retrofit:${retrofitVersion}")
 }
