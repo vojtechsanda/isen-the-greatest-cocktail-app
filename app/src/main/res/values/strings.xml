@@ -8,4 +8,7 @@
     <string name="categories">Categories</string>
     <string name="drinks">Drinks</string>
     <string name="favorites">Favorites</string>
+    <string name="tab_item_random">Random</string>
+    <string name="tab_item_category">Categories</string>
+    <string name="tab_item_favorite">Favorites</string>
 </resources>
