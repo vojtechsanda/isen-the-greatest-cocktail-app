@@ -37,7 +37,7 @@ import fr.isen.vojtechsanda.thegreatestcocktailapp.views.infoCard.InfoCardView
 import fr.isen.vojtechsanda.thegreatestcocktailapp.views.layout.appScaffold.AppScaffold
 
 @Composable
-fun DrinkDetailScreen(drinkId: String) {
+fun DrinkDetailScreen(drinkId: String? = null) {
     val cocktail = DrinkData(
         id = "super-cocktail",
         image = painterResource(R.drawable.test_cocktail_detail),
