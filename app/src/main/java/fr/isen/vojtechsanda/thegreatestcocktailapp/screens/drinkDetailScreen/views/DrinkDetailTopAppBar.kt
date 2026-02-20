@@ -1,4 +1,4 @@
-package fr.isen.vojtechsanda.thegreatestcocktailapp.screens.detailDrinkScreen.views
+package fr.isen.vojtechsanda.thegreatestcocktailapp.screens.drinkDetailScreen.views
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.size
@@ -22,7 +22,7 @@ import fr.isen.vojtechsanda.thegreatestcocktailapp.models.DrinkData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailDrinkTopAppBar(cocktail: DrinkData) {
+fun DrinkDetailTopAppBar(cocktail: DrinkData) {
     val context = LocalContext.current
 
     TopAppBar(

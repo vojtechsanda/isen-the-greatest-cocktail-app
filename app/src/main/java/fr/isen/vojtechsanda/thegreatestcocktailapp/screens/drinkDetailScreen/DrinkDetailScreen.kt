@@ -1,4 +1,4 @@
-package fr.isen.vojtechsanda.thegreatestcocktailapp.screens.detailDrinkScreen
+package fr.isen.vojtechsanda.thegreatestcocktailapp.screens.drinkDetailScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -30,19 +30,21 @@ import fr.isen.vojtechsanda.thegreatestcocktailapp.models.CategoryData
 import fr.isen.vojtechsanda.thegreatestcocktailapp.models.DrinkData
 import fr.isen.vojtechsanda.thegreatestcocktailapp.models.IngredientData
 import fr.isen.vojtechsanda.thegreatestcocktailapp.models.IngredientUnitEnum
-import fr.isen.vojtechsanda.thegreatestcocktailapp.screens.detailDrinkScreen.views.DetailDrinkCategoryView
-import fr.isen.vojtechsanda.thegreatestcocktailapp.screens.detailDrinkScreen.views.DetailDrinkTopAppBar
+import fr.isen.vojtechsanda.thegreatestcocktailapp.screens.drinkDetailScreen.views.DrinkDetailCategoryView
+import fr.isen.vojtechsanda.thegreatestcocktailapp.screens.drinkDetailScreen.views.DrinkDetailTopAppBar
 import fr.isen.vojtechsanda.thegreatestcocktailapp.views.infoCard.InfoCardText
 import fr.isen.vojtechsanda.thegreatestcocktailapp.views.infoCard.InfoCardView
 import fr.isen.vojtechsanda.thegreatestcocktailapp.views.layout.appScaffold.AppScaffold
 
 @Composable
-fun DetailCocktailScreen() {
+fun DrinkDetailScreen(drinkId: String) {
     val cocktail = DrinkData(
+        id = "super-cocktail",
         image = painterResource(R.drawable.test_cocktail_detail),
         name = "Super cocktail",
         categories = listOf(
             CategoryData(
+                id = "other-unknown",
                 text = "Other / Unknown",
                 iconVector = Icons.Default.Info,
                 backgroundFrom = colorResource(R.color.light_blue),
@@ -50,6 +52,7 @@ fun DetailCocktailScreen() {
             ),
 
             CategoryData(
+                id = "non-alcoholic",
                 text = "Non alcoholic",
                 iconVector = Icons.Default.Warning,
                 backgroundFrom = colorResource(R.color.muted_sage),
@@ -57,6 +60,7 @@ fun DetailCocktailScreen() {
             ),
 
             CategoryData(
+                id = "highball-glass",
                 text = "Highball glass",
                 iconVector = Icons.Default.Star,
                 backgroundFrom = colorResource(R.color.transparent),
@@ -85,7 +89,7 @@ fun DetailCocktailScreen() {
 
     AppScaffold(
         verticalScrolling = true,
-        topBar = { DetailDrinkTopAppBar(cocktail) },
+        topBar = { DrinkDetailTopAppBar(cocktail) },
         content = { childModifier ->
             Column(
                 modifier = childModifier,
@@ -104,7 +108,7 @@ fun DetailCocktailScreen() {
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    cocktail.categories.map { DetailDrinkCategoryView(category = it) }
+                    cocktail.categories.map { DrinkDetailCategoryView(category = it) }
                 }
 
                 InfoCardView(
