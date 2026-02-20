@@ -73,8 +73,6 @@ fun FavoritesScreen(modifier: Modifier = Modifier, withBottomBar: Boolean = fals
             ),
 
             recipe = "This is some very interesting recipe on how to do the Super cocktail.",
-
-            isFavorite = true
         )
     )
 

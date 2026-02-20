@@ -230,8 +230,6 @@ fun DrinkDetailDTO.toDrinkDetailData(): DrinkDetailData {
         name = this.strDrink,
         categories = categories,
         ingredients = ingredients,
-        recipe = this.strInstructions,
-        // TODO: Connect isFavorite
-        isFavorite = false
+        recipe = this.strInstructions
     )
 }

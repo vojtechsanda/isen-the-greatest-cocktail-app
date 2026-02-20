@@ -7,5 +7,4 @@ data class DrinkDetailData(
     val categories: List<CategoryData>,
     val ingredients: List<IngredientData>,
     val recipe: String?,
-    val isFavorite: Boolean
 )
