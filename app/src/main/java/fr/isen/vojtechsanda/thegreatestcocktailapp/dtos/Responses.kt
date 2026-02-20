@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CategoriesResponse(
     @SerializedName("drinks")
-    val drinks: List<CategoryDTO>
+    val drinks: List<CategoryPreviewDTO>
 )
 
 data class DrinksListResponse(
@@ -13,11 +13,6 @@ data class DrinksListResponse(
 )
 
 data class DrinkDetailResponse(
-    @SerializedName("drinks")
-    val drinks: List<DrinkDetailDTO>
-)
-
-data class RandomDrinkResponse(
     @SerializedName("drinks")
     val drinks: List<DrinkDetailDTO>
 )

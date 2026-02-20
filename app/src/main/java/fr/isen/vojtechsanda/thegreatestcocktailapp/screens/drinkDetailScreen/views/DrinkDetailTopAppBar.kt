@@ -18,38 +18,39 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fr.isen.vojtechsanda.thegreatestcocktailapp.R
-import fr.isen.vojtechsanda.thegreatestcocktailapp.models.DrinkData
+import fr.isen.vojtechsanda.thegreatestcocktailapp.models.DrinkDetailData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DrinkDetailTopAppBar(cocktail: DrinkData) {
+fun DrinkDetailTopAppBar(drink: DrinkDetailData?) {
     val context = LocalContext.current
 
     TopAppBar(
         title = {
-            Text("${stringResource(R.string.cocktail)} ${cocktail.name}")
+            Text("${stringResource(R.string.cocktail)} ${drink?.name}")
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = colorResource(R.color.deep_midnight_purple),
             titleContentColor = colorResource(R.color.white),
         ),
         actions = {
-            IconButton(onClick = {
-                Toast.makeText(
-                    context,
-                    if (cocktail.isFavorite) "Remove from favorites | TMP" else "Add to favorites | TMP",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }) {
-                Icon(
-                    tint = colorResource(R.color.red),
-                    modifier = Modifier.size(32.dp),
-                    imageVector = if (cocktail.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                    contentDescription = if (cocktail.isFavorite) stringResource(R.string.add_to_favorites) else stringResource(
-                        R.string.remove_from_favorites
+            if (drink != null)
+                IconButton(onClick = {
+                    Toast.makeText(
+                        context,
+                        if (drink.isFavorite) "Remove from favorites | TMP" else "Add to favorites | TMP",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }) {
+                    Icon(
+                        tint = colorResource(R.color.red),
+                        modifier = Modifier.size(32.dp),
+                        imageVector = if (drink.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        contentDescription = if (drink.isFavorite) stringResource(R.string.add_to_favorites) else stringResource(
+                            R.string.remove_from_favorites
+                        )
                     )
-                )
-            }
+                }
         }
     )
 }

@@ -7,7 +7,7 @@ import androidx.compose.material.icons.filled.Warning
 import com.google.gson.annotations.SerializedName
 import fr.isen.vojtechsanda.thegreatestcocktailapp.R
 import fr.isen.vojtechsanda.thegreatestcocktailapp.models.CategoryData
-import fr.isen.vojtechsanda.thegreatestcocktailapp.models.DrinkData
+import fr.isen.vojtechsanda.thegreatestcocktailapp.models.DrinkDetailData
 import fr.isen.vojtechsanda.thegreatestcocktailapp.models.IngredientData
 
 data class DrinkDetailDTO(
@@ -115,7 +115,7 @@ data class DrinkDetailDTO(
     val dateModified: String?
 )
 
-fun DrinkDetailDTO.toDrinkData(): DrinkData {
+fun DrinkDetailDTO.toDrinkDetailData(): DrinkDetailData {
     val ingredients = listOf(
         if (this.strIngredient1 != null) IngredientData(
             this.strIngredient1,
@@ -224,7 +224,7 @@ fun DrinkDetailDTO.toDrinkData(): DrinkData {
     ).mapNotNull { it }
 
 
-    return DrinkData(
+    return DrinkDetailData(
         id = this.idDrink,
         imageUrl = this.strDrinkThumb,
         name = this.strDrink,

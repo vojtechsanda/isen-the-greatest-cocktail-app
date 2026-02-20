@@ -21,16 +21,24 @@ fun AppScaffold(
     topBar: @Composable (() -> Unit) = {},
     content: @Composable (modifier: Modifier) -> Unit,
     verticalScrolling: Boolean = false,
+    withBottomBar: Boolean = false
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = topBar
+        topBar = topBar,
     ) { scaffoldInnerPadding ->
         val scrollingModifier =
             if (verticalScrolling) Modifier.verticalScroll(rememberScrollState()) else Modifier;
 
+        val paddingModifier =
+            if (withBottomBar) Modifier.padding(top = scaffoldInnerPadding.calculateTopPadding()) else Modifier.padding(
+                top = scaffoldInnerPadding.calculateTopPadding(),
+                bottom = scaffoldInnerPadding.calculateBottomPadding() + 8.dp
+            )
+
         Box(
-            modifier = scrollingModifier
+            modifier = paddingModifier
+                .then(scrollingModifier)
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
@@ -39,13 +47,10 @@ fun AppScaffold(
                         )
                     )
                 )
-                .padding(scaffoldInnerPadding)
                 .fillMaxHeight()
         ) {
             content(
-                Modifier
-                    .padding(all = 20.dp)
-                    .fillMaxWidth()
+                Modifier.fillMaxWidth()
             )
         }
     }

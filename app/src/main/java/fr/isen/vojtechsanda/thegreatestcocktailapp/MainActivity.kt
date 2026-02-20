@@ -69,13 +69,13 @@ class MainActivity : ComponentActivity() {
                         startDestination = AppBottomNavigation.LIST.name
                     ) {
                         composable(AppBottomNavigation.RANDOM.name) {
-                            DrinkDetailScreen(modifier = scaffoldModifier)
+                            DrinkDetailScreen(modifier = scaffoldModifier, withBottomBar = true)
                         }
                         composable(AppBottomNavigation.LIST.name) {
-                            CategoriesScreen(modifier = scaffoldModifier)
+                            CategoriesScreen(modifier = scaffoldModifier, withBottomBar = true)
                         }
                         composable(AppBottomNavigation.FAVORITES.name) {
-                            FavoritesScreen(modifier = scaffoldModifier)
+                            FavoritesScreen(modifier = scaffoldModifier, withBottomBar = true)
                         }
                     }
                 }
