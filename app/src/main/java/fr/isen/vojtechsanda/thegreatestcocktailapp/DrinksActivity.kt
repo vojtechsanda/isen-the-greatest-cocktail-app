@@ -13,12 +13,16 @@ class DrinksActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val categoryId = intent.getStringExtra("CATEGORY_ID") ?: ""
+        val categoryId = intent.getStringExtra(EXTRA_CATEGORY_ID) ?: ""
 
         setContent {
             TheGreatestCocktailAppTheme {
                 DrinksScreen(categoryId)
             }
         }
+    }
+
+    companion object {
+        const val EXTRA_CATEGORY_ID = "CATEGORY_ID"
     }
 }

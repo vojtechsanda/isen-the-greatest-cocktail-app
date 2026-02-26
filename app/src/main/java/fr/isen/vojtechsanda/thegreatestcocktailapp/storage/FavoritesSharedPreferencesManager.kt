@@ -38,5 +38,3 @@ class FavoritesSharedPreferencesManager {
         }
     }
 }
-
-// TODO: Přidat do activity static konstantu pro prop name

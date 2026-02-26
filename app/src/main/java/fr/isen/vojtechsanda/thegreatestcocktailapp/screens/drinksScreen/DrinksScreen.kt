@@ -63,7 +63,7 @@ fun DrinksScreen(
                 items(items = drinksState.value) { drink ->
                     ColumnItemCardView(
                         modifier = Modifier.clickable {
-                            drinkDetailIntent.putExtra("DRINK_ID", drink.id)
+                            drinkDetailIntent.putExtra(DrinkDetailActivity.EXTRA_DRINK_ID, drink.id)
                             context.startActivity(drinkDetailIntent)
                         },
                         title = drink.name,

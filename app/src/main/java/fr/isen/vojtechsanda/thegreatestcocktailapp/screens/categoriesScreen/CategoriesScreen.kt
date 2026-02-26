@@ -56,7 +56,7 @@ fun CategoriesScreen(modifier: Modifier = Modifier, withBottomBar: Boolean = fal
                 items(items = categoriesState.value) { category ->
                     ColumnItemCardView(
                         modifier = Modifier.clickable {
-                            drinksIntent.putExtra("CATEGORY_ID", category.id)
+                            drinksIntent.putExtra(DrinksActivity.EXTRA_CATEGORY_ID, category.id)
                             context.startActivity(drinksIntent)
                         },
                         title = category.name,
