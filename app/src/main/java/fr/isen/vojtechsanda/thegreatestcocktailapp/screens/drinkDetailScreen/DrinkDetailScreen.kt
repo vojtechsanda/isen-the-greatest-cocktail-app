@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
@@ -78,7 +79,12 @@ fun DrinkDetailScreen(
                 ) {
                     ImageView(drinkState.value!!.imageUrl)
 
-                    Text(drinkState.value!!.name, fontSize = 40.sp, fontWeight = FontWeight.Bold)
+                    Text(
+                        drinkState.value!!.name,
+                        fontSize = 40.sp,
+                        lineHeight = 44.sp,
+                        fontWeight = FontWeight.Bold
+                    )
 
                     FlowRow(
                         horizontalArrangement = Arrangement.spacedBy(
@@ -120,6 +126,7 @@ fun ImageView(imageUrl: String?) {
             modifier = Modifier
                 .clip(CircleShape)
                 .fillMaxWidth(0.7f)
+                .aspectRatio(1f)
                 .border(
                     width = 2.dp,
                     color = colorResource(R.color.teal_700),
